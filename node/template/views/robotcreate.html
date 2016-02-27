@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>robot Create</title>
+
+    <style>
+        body {
+            padding-top: 50px;
+        }
+    </style>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-messages.js"></script>
+    <script src="../../js/ui-bootstrap-tpls-1.1.2.min.js"></script>
+    <script src="../../js/robotservice.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/robotcreate.js"></script>
+</head>
+
+<body>
+    <div class="container" ng-app="robots" ng-controller="robotCreateCtrl">
+        <ul class="nav nav-tabs">
+            <li role="presentation" ng-class="getTabClass(tab, title)" ng-repeat="tab in getTabs()" class="smooth_transition">
+                <a ng-click="changeLocation(tab.url)" role="tab">{{tab.title}}</a>
+            </li>
+        </ul>
+        <ol class="breadcrumb">
+            <li><a ng-click="changeLocation(uiUrl)" role="button">{{title}}</a></li>
+            <li class="active">Create</li>
+        </ol>
+
+        <form class="form-horizontal" name="createform" novalidate ng-submit="createform.$valid && create()">
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="name">Name</label>
+                <div class="col-xs-4">
+                    <input class="form-control" type="text" ng-model="item.name" id="name" name="name" required ng-maxlength="255" ng-minlength="0" placeholder="name" />
+                </div>
+                <div class="col-xs-4" ng-messages="createform.name.$error" ng-show="createform.name.$touched">
+                    <div ng-messages-include="../../views/messages.html"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="name">Subscriptions</label>
+                <div class="col-xs-4">
+                    <input class="form-control" type="text" ng-model="item.subscriptions" id="subscriptions" name="subscriptions" ng-maxlength="255" ng-minlength="0" placeholder="subscriptions" />
+                </div>
+                <div class="col-xs-4" ng-messages="createform.subscriptions.$error" ng-show="createform.subscriptions.$touched">
+                    <div ng-messages-include="../../views/messages.html"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="name">Description</label>
+                <div class="col-xs-4">
+                    <input class="form-control" type="text" ng-model="item.description" id="description" name="description" required ng-maxlength="255" ng-minlength="0" placeholder="description" />
+                </div>
+                <div class="col-xs-4" ng-messages="createform.description.$error" ng-show="createform.description.$touched">
+                    <div ng-messages-include="../../views/messages.html"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="name">Script</label>
+                <div class="col-xs-4">
+                    <input class="form-control" type="text" ng-model="item.script" id="script" name="script" required ng-maxlength="10000" ng-minlength="0" placeholder="script" />
+                </div>
+                <div class="col-xs-4" ng-messages="createform.script.$error" ng-show="createform.script.$touched">
+                    <div ng-messages-include="../../views/messages.html"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2" for="name">App</label>
+                <div class="col-xs-4">
+                    <input class="form-control" type="text" ng-model="item.app" id="app" name="app" ng-maxlength="255" ng-minlength="0" placeholder="application related to this robot" />
+                </div>
+                <div class="col-xs-4" ng-messages="createform.app.$error" ng-show="createform.app.$touched">
+                    <div ng-messages-include="../../views/messages.html"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4">
+                    <a ng-click="changeLocation(uiUrl)" class="glyphicon glyphicon-arrow-left btn btn-info" role="button"></a>
+                    <button class="btn btn-info" type="submit" ng-disabled="createform.$invalid">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+node ./template/genservicejs.js 
+node ./template/gencreatejs.js 
+node ./template/genlistjs.js 
+node ./template/geneditjs.js 
+cp ./template/js/* ./js/
+
+node ./template/gencreatehtml.js 
+node ./template/genedithtml.js 
+node ./template/genlisthtml.js 
+cp ./template/views/* ./views/
+

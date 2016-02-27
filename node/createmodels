@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+for filename in ./models/*.js; do
+    model=$(basename $filename .js)
+    echo $model
+    if [[ $model != "models" ]]; then
+        cp ./template/notifications.html ./template/${model}s.html
+        sed -i '' "s/notification/${model}/g" ./template/${model}s.html
+    fi
+done

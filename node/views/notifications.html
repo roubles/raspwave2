@@ -1,0 +1,130 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html>
+
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Optimize mobile viewport -->
+
+    <title>Notifications</title>
+
+    <style>
+        html {
+            height: 100%;
+        }
+        
+        body {
+            height: 100%;
+            padding-top: 50px;
+        }
+        
+        .disabled {
+            cursor: not-allowed;
+            opacity: .3;
+        }
+        
+        .container {
+            height: 100%;
+        }
+        
+        .table-container {
+            height: 50%;
+            overflow: auto;
+        }
+        
+        .table {
+            height: 90%;
+        }
+        
+        .table tr {
+            width: 100%;
+            height: 10px;
+        }
+    </style>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-messages.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
+    <script src="//lorenzofox3.github.io/smart-table-website/bower_components/angular-smart-table/dist/smart-table.js"></script>
+    <script src="../js/ui-bootstrap-tpls-1.1.2.min.js"></script>
+    <script src="../js/notificationservice.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/notifications.js"></script>
+</head>
+
+<body>
+    <div class="container" ng-app="notifications" ng-controller="notificationsCtrl">
+        <ul class="nav nav-tabs">
+            <li role="presentation" ng-class="getTabClass(tab, title)" ng-repeat="tab in getTabs()" class="smooth_transition">
+                <a ng-click="changeLocation(tab.url)" role="tab">{{tab.title}}</a>
+            </li>
+        </ul>
+        <ol class="breadcrumb">
+            <li class="active">{{title}}</li>
+        </ol>
+
+        <div class="table-container">
+            <table st-table="displayedCollection" st-safe-src="items" class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th st-sort-default="true">Created</th>
+                        <th st-sort="type">Type</th>
+                        <th st-sort="value">Value</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th><input st-search="type" /></th>
+                        <th><input st-search="value" /></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height:15px;" ng-repeat="item in displayedCollection">
+                        <td cs-select="row"></td>
+                        <td>{{item.date}} </td>
+                        <td>{{item.type}} </td>
+                        <td>{{item.value}} </td>
+                        <td>
+                            <a ng-click="setItem(item)" class="glyphicon glyphicon glyphicon-edit btn btn-dngr" role="button"></a>
+                            <a ng-really-message="Delete {{itemName}} {{item._id}}?" ng-really-click="deleteByItem(item)" class="glyphicon glyphicon-trash btn btn-dngr" role="button"></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <form ng-submit="search()">
+                            <input type="text" ng-model="q" />
+                        </form>
+                </tfoot>
+                </tr>
+            </table>
+        </div>
+        <ul class="pagination">
+            <li><a ng-click="getPage(1)" ng-class="{disabled: disablePrev()}">&laquo;</a></li>
+            <li><a ng-click="prevPage()" ng-class="{disabled: disablePrev()}">&lsaquo;</a></li>
+            <li ng-class="getPageClass(page)" ng-repeat="page in pages"> <a ng-click="getPage(page)">{{page}}</a></li>
+            <li> <a ng-class="{disabled: maxDisplayed == maxPage}" ng-click="rightElipsis()">..</a></li>
+            <li><a ng-click="nextPage()" ng-class="{disabled: disableNext()}">&rsaquo;</a></li>
+            <li><a ng-click="getPage(maxPage)" ng-class="{disabled: disableNext()}">&raquo;</a></li>
+            <li>
+                <select ng-change="refresh()" ng-options="i.value as i.label for i in limits" ng-model="limit">
+                <option></option>
+            </select>
+                <li>
+        </ul>
+        <br>
+        <br>
+        <a ng-click="changeLocation(uiUrl + 'create')" class="btn btn-info" role="button">Add {{itemName}}</a>
+        <a ng-really-message="Delete selected {{title}}?" style="float: right;" ng-really-click="deleteSelected()" class="glyphicon glyphicon-trash btn btn-dngr" role="button"></a>
+    </div>
+</body>
+
+</html>

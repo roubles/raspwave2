@@ -1,0 +1,85 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html>
+<head>
+<!-- META -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+<title>Transactions</title>
+
+<style>
+body { padding-top:50px; }
+</style>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-messages.js"></script>
+<script src="../js/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../js/transactions.js"></script>
+
+</head>
+<body>
+<div class="container" ng-app="transactions" ng-controller="transactionsCtrl">
+<ul class="nav nav-tabs">
+  <li><a href="home">Home</a></li>
+  <li><a href="/ui/notifications">Notifications</a></li>
+  <li><a href="/ui/robots">Robots</a></li>
+  <li><a href="/ui/cronbots">Cronbots</a></li>
+  <li><a href="/ui/transforms">Transforms</a></li>
+  <li><a href="/ui/nodes">Nodes</a></li>
+  <li class="active"><a href="/ui/transactions">Transactions</a></li>
+  <li><a href="/ui/logs">Logs</a></li>
+</ul>
+<ol class = "breadcrumb">
+    <li class = "active">Transactions</li>
+</ol>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>
+                <a href="#" ng-click="sortType = 'date'; submitted_time = !sortReverse">
+                    Submitted Time
+                    <span ng-show="sortType == 'date' && !submitted_time" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'date' && submitted_time" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'state'; sortReverse = !sortReverse">
+                    State
+                    <span ng-show="sortType == 'state' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'state' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+                    Description
+                    <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                    <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="transaction in transactions | orderBy:sortType:sortReverse">
+        <td>{{transaction.submitted_time}} </td>
+        <td>{{transaction.state}} </td>
+        <td>{{transaction.description}} </td>
+        <td>
+            <a ng-click="setSelected(transaction)" class="glyphicon glyphicon glyphicon-edit btn btn-dngr" role="button"></a>
+            <a ng-really-message="Delete transaction {{transaction._id}}?" ng-really-click="delete(transaction)" confirm="Are you sure?" class="glyphicon glyphicon-trash btn btn-dngr" role="button"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="#" class="controls previous" ng-disabled="disablePrev()" ng-click="prevPage()">&laquo; prev</a>
+<a href="#" class="controls next" ng-disabled="disableNext()" ng-click="nextPage()">next &raquo;</a>
+<br>
+<br>
+<a href="/ui/transactions/create" class="btn btn-info" role="button">Add transaction</a>
+</div>
+</body>
+</html>

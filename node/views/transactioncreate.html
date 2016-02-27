@@ -1,0 +1,84 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html>
+<head>
+<!-- META -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+<title>Transaction Create</title>
+
+<style>
+body { padding-top:50px; }
+</style>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-messages.js"></script>
+<script src="../../js/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../../js/transactionedit.js"></script>
+
+</head>
+<body>
+<div class="container" ng-app="transactionedit" ng-controller="transactioneditCtrl">
+    <ul class="nav nav-tabs">
+        <li><a href="home">Home</a></li>
+        <li><a href="/ui/notifications">Notifications</a></li>
+        <li><a href="/ui/robots">Robots</a></li>
+        <li><a href="/ui/cronbots">Cronbots</a></li>
+        <li><a href="/ui/transforms">Transforms</a></li>
+        <li><a href="/ui/nodes">Nodes</a></li>
+        <li class="active"><a href="/ui/transactions">Transactions</a></li>
+        <li><a href="/ui/logs">Logs</a></li>
+    </ul>
+
+    <ol class = "breadcrumb">
+        <li><a href = "/ui/transactions">Transactions</a></li>
+        <li class = "active">Create</li>
+    </ol>
+
+    <form class="form-horizontal" name="transactioncreate" novalidate ng-submit="transactioncreate.$valid && create()">
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="state">State</label>
+            <div class="col-xs-4">
+                <select class="form-control" ng-model="state" id="state" name="state">
+                  <option value="READY">READY</option>
+                  <option value="RUNNING">RUNNING</option>
+                  <option value="SUCCESS">SUCCESS</option>
+                  <option value="FAILED">FAILED</option>
+                </select>
+            </div>
+            <div class="col-xs-4" ng-messages="transactioncreate.state.$error" ng-show="transactioncreate.state.$touched">
+                <div ng-messages-include="../../views/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="description">Description</label>
+            <div class="col-xs-4"> 
+                <input class="form-control" type="text" ng-model="description" id="description" name="description" placeholder="description" />
+            </div>
+            <div class="col-xs-4" ng-messages="transactioncreate.description.$error" ng-show="transactioncreate.description.$touched">
+                <div ng-messages-include="../../views/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="transaction">Transaction</label>
+            <div class="col-xs-4"> 
+                <input class="form-control" type="text" ng-model="transaction" id="transaction" name="transaction" placeholder="transaction" />
+            </div>
+            <div class="col-xs-4" ng-messages="transactionedit.transaction.$error" ng-show="transactionedit.transaction.$touched">
+                <div ng-messages-include="../../views/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-4">
+                <a href="/ui/transactions" class="glyphicon glyphicon-arrow-left btn btn-info" role="button"></a>
+                <button class="btn btn-info" type="submit" ng-disabled="transactioncreate.$invalid">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

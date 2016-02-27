@@ -1,0 +1,89 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html>
+<head>
+<!-- META -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+<title>Cronbot Create</title>
+
+<style>
+body { padding-top:50px; }
+</style>
+
+<!-- SPELLS -->
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-messages.js"></script>
+<script src="../../js/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="../../js/cronbotedit.js"></script>
+
+</head>
+<body>
+<div class="container" ng-app="cronbotedit" ng-controller="cronboteditCtrl">
+    <ul class="nav nav-tabs">
+        <li><a href="home">Home</a></li>
+        <li><a href="/ui/notifications">Notifications</a></li>
+        <li><a href="/ui/robots">Robots</a></li>
+        <li class="active"><a href="/ui/cronbots">Cronbots</a></li>
+        <li><a href="/ui/transforms">Transforms</a></li>
+        <li><a href="/ui/nodes">Nodes</a></li>
+        <li><a href="/ui/transactions">Transactions</a></li>
+        <li><a href="/ui/logs">Logs</a></li>
+    </ul>
+
+    <ol class = "breadcrumb">
+        <li><a href = "/ui/cronbots">Cronbots</a></li>
+        <li class = "active">Create</li>
+    </ol>
+
+    <form class="form-horizontal" name="cronbotcreate" novalidate ng-submit="cronbotcreate.$valid && create()">
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="name">Name</label>
+            <div class="col-xs-4"> 
+                <input class="form-control" type="text" ng-model="name" id="name" name="name" placeholder="name" />
+            </div>
+            <div class="col-xs-4" ng-messages="cronbotedit.name.$error" ng-show="cronbotedit.name.$touched">
+                <div ng-messages-include="../../views/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="description">Description</label>
+            <div class="col-xs-4"> 
+                <input class="form-control" type="text" ng-model="description" id="description" name="description" placeholder="description" />
+            </div>
+            <div class="col-xs-4" ng-messages="cronbotedit.description.$error" ng-show="cronbotedit.description.$touched">
+                <div ng-messages-include="../../views/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="schedule">Schedule</label>
+            <div class="col-xs-4"> 
+                <input class="form-control" type="text" ng-model="schedule" id="schedule" name="schedule" placeholder="schedule" />
+            </div>
+            <div class="col-xs-4" ng-messages="cronbotedit.schedule.$error" ng-show="cronbotedit.schedule.$touched">
+                <div ng-messages-include="../../views/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-2" for="script">Script</label>
+            <div class="col-xs-4"> 
+                <textarea rows="10" cols="80" class="form-control" type="text" ng-model="script" id="script" name="script" placeholder="your cronbot code here"/></textarea>
+            </div>
+            <div class="col-xs-4" ng-messages="cronbotedit.script.$error" ng-show="cronbotedit.script.$touched">
+                <div ng-messages-include="../../views/messages.html"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-4">
+                <a href="/ui/cronbots" class="glyphicon glyphicon-arrow-left btn btn-info" role="button"></a>
+                <button class="btn btn-info" type="submit" ng-disabled="cronbotcreate.$invalid">Add</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

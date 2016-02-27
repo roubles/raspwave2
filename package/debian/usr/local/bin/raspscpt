@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$TEST_RASPWAVE" == "TRUE" ]; then
+    echo "using test environment"
+    export PYTHONPATH=${PYTHONPATH}:~/raspwave/pylib
+else
+    export PYTHONPATH=${PYTHONPATH}:/etc/raspwave/pylib
+fi
+python "$@"
